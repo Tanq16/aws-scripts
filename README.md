@@ -7,7 +7,11 @@ The following scripts currently live in the repo &rarr;
 **General**
 
 * `aws-multi-session.sh` &rarr; A script to assume a given role across multiple accounts via an IAM user.
+* `iam-gaad-combine.py` &rarr; A script that combines the result of the multiple JSON files resulting from `aws iam get-account-authorization-details --profile $PRFL > $PRFL-gaad.json`.
+* `aws-config-parser.py` &rarr; A script to print out the credentials from the `~/.aws/credentials` file in JSON format for easy `jq` parsing.
 
 **Account Specific**
 
-* s
+* `ebs-unencrypted-volsnaps.py` &rarr; A script to print number of unencrypted volumes (all and those attached & in use) and snapshots for a given account profile.
+* `iam-old-active-keys.py` &rarr; A script to print out all users and their access keys when the keys have age higher than 90 days for a given account profile.
+* `s3-num-objects.py` &rarr; A script to print out number of objects per bucket for a given account profile.
