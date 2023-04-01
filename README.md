@@ -1,6 +1,10 @@
 # AWS Scripts Collection
 
-This repo contains a collection of helpful AWS security-related scripts.
+This repo contains a collection of helpful AWS security-related scripts. The best way to use this repo is to clone it in a specific location and call the scripts with `bash` or `python` or `python3` directly. Example &rarr;
+
+```bash
+git clone https://github.com/tanq16/aws-scripts.git /opt/aws-scripts/
+```
 
 The following scripts currently live in the repo &rarr;
 
