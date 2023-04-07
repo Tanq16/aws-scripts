@@ -46,7 +46,7 @@ def main(data):
 if __name__ == '__main__':
     files = [file for file in os.listdir(".") if file.endswith("gaad.json")]
     if not "combined-gaad.json" in files:
-        print("Usage: python3 s3-num-objects.py [account_names location]\nEnsure that combined-gaad.json in the current directory.")
+        print("Usage: python3 iam-roles-trusting-root.py\nEnsure that combined-gaad.json in the current directory.")
         sys.exit(1)
     f = open("combined-gaad.json")
     data = json.loads(f.read())
