@@ -19,3 +19,4 @@ The following scripts currently live in the repo &rarr;
 * `ebs-unencrypted-volsnaps.py` &rarr; A script to print number of unencrypted volumes (all and those attached & in use) and snapshots for a given account profile.
 * `iam-old-active-keys.py` &rarr; A script to print out all users and their access keys when the keys have age higher than 90 days for a given account profile.
 * `s3-num-objects.py` &rarr; A script to print out number of objects per bucket for a given account profile.
+* `s3-list-bucket-policies.py` &rarr; A script to print out key value pairs of bucket name and its policy in JSON to stdout.
