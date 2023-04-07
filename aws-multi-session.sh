@@ -32,7 +32,8 @@ aws_access_key_id=$ak
 aws_secret_access_key=$sak
 aws_session_token=$st
 " >> ~/.aws/credentials
-echo "" > profile_names
+echo -n "" > profile_names
+echo -n "" > account_names
 
 
 # Populate the array below in the format shown for all accounts
@@ -49,6 +50,7 @@ do
     acct_num="${acct[0]}"
     alias="${acct[1]}"
     echo $alias >> profile_names
+    echo "$acct_num:$alias" >> account_names
     values=$(aws sts assume-role --role-arn arn:aws:iam::$acct_num:role/$rolename --role-session-name $alias --profile mfaprofile)
     ak=$(echo $values | jq '.Credentials.AccessKeyId' | tr -d "\"")
     sak=$(echo $values | jq '.Credentials.SecretAccessKey' | tr -d "\"")

@@ -8,7 +8,7 @@ git clone https://github.com/tanq16/aws-scripts.git /opt/aws-scripts/
 
 The following scripts currently live in the repo &rarr;
 
-**General**
+**Utility**
 
 * `aws-multi-session.sh` &rarr; A script to assume a given role across multiple accounts via an IAM user.
 * `iam-gaad-combine.py` &rarr; A script that combines the result of the multiple JSON files resulting from `aws iam get-account-authorization-details --profile $PRFL > $PRFL-gaad.json`.
@@ -20,3 +20,7 @@ The following scripts currently live in the repo &rarr;
 * `iam-old-active-keys.py` &rarr; A script to print out all users and their access keys when the keys have age higher than 90 days for a given account profile.
 * `s3-num-objects.py` &rarr; A script to print out number of objects per bucket for a given account profile.
 * `s3-list-bucket-policies.py` &rarr; A script to print out key value pairs of bucket name and its policy in JSON to stdout.
+
+**Account Combined**
+
+* `iam-roles-trusting-root.py` &rarr; A script to print out JSON of all roles that trust account root for all accounts in combined gaad.
