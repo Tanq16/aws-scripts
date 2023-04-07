@@ -23,7 +23,7 @@ def get_account_numbers(data):
     account_numbers = list(set([arn.split(':')[4] for arn in arns]))
     return account_numbers
 
-def get_root_trusts(data, account_numbers, account_names):
+def get_root_trusts(data, account_numbers):
     roles_trusting_root = {}
     for acct in account_numbers:
         root_arn = f"arn:aws:iam::{acct}:root"
@@ -35,37 +35,20 @@ def get_root_trusts(data, account_numbers, account_names):
                     trusting_roles.append(role['Arn'])
         if len(trusting_roles) == 0:
             continue
-        if len(account_names.keys()) == 0:
-            roles_trusting_root[acct] = list(set(trusting_roles))
-        else:
-            trusting_roles_2 = list(set(trusting_roles))
-            trusting_roles = []
-            for i in trusting_roles_2:
-                item = i
-                for j in account_names.keys():
-                    item = item.replace(j, account_names[j])
-                trusting_roles.append(item)
-            roles_trusting_root[account_names[acct]] = list(set(trusting_roles))
+        roles_trusting_root[acct] = list(set(trusting_roles))
     return roles_trusting_root
 
-def main(data, account_names):
+def main(data):
     account_numbers = get_account_numbers(data)
-    roles_trusting_root = get_root_trusts(data, account_numbers, account_names)
+    roles_trusting_root = get_root_trusts(data, account_numbers)
     print(json.dumps(roles_trusting_root))
 
 if __name__ == '__main__':
     files = [file for file in os.listdir(".") if file.endswith("gaad.json")]
-    account_names = {}
     if not "combined-gaad.json" in files:
         print("Usage: python3 s3-num-objects.py [account_names location]\nEnsure that combined-gaad.json in the current directory.")
         sys.exit(1)
-    if len(sys.argv) == 2:
-        f = open(sys.argv[1])
-        data = f.read().splitlines()
-        for i in data:
-            account_names[i.split(":")[0]] = i.split(":")[1]
-        f.close()
     f = open("combined-gaad.json")
     data = json.loads(f.read())
     f.close()
-    main(data, account_names)
+    main(data)
