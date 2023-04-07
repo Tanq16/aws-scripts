@@ -24,8 +24,7 @@ def main(profile_name):
             if e.response['Error']['Code'] == 'NoSuchBucketPolicy':
                 pass
             else:
-                print("Unexpected error:", e.response)
-                sys.exit()
+                raise e
 
     print(json.dumps(policies))
 
