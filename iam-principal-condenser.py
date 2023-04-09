@@ -66,9 +66,12 @@ def condense_principals(data):
 
 def main(data):
     condensed_roles, condensed_users = condense_principals(data)
-    to_write = {'Users': condensed_users, 'Roles': condensed_roles}
-    f = open('analysis/iam-condensed-principals.json', 'w')
-    f.write(json.dumps(to_write))
+    f = open('analysis/iam-condensed-users.json', 'w')
+    f.write(json.dumps(condensed_users))
+    f.close()
+    f = open('analysis/iam-condensed-roles.json', 'w')
+    f.write(json.dumps(condensed_roles))
+    f.close()
 
 if __name__ == '__main__':
     if not os.path.exists('./analysis/combined-gaad.json'):
