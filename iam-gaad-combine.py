@@ -13,6 +13,7 @@
 # file is stored inside the analysis folder in the cwd.
 
 import json
+import sys
 import os
 
 def get_latest_policy(policy):
