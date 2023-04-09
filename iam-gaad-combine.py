@@ -29,7 +29,7 @@ def combine_gaad_files(gaad_path):
     for file in files:
         if file == 'combined-gaad.json':
             continue
-        f = open(file)
+        f = open(gaad_path + '/' + file)
         data = json.load(f)
         f.close()
         for i in data['UserDetailList']:
