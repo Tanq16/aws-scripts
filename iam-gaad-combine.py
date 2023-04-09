@@ -1,6 +1,6 @@
 # IAM GAAD Combine
 # ----------------
-# This script navigates the present working directory to
+# This script navigates the directory path argument to
 # collect and ingest all files ending with "*-gaad.json"
 # and combine them into a final "combined-gaad.json". It
 # is then stored within the "analysis" directory.
@@ -20,8 +20,8 @@ def get_latest_policy(policy):
     policy['PolicyVersionList'] = pvl
     return policy
 
-def combine_gaad_files():
-    files = [file for file in os.listdir('.') if file.endswith('gaad.json')]
+def combine_gaad_files(gaad_path):
+    files = [file for file in os.listdir(gaad_path) if file.endswith('gaad.json')]
     combined = {'UserDetailList':[], 'GroupDetailList':[], 'RoleDetailList':[], 'Policies':[]}
 
     added_arns = []
@@ -55,4 +55,7 @@ def combine_gaad_files():
     f.close()
 
 if __name__ == '__main__':
-    combine_gaad_files()
+    if len(sys.argv) < 2:
+        print('Usage: python3 iam-gaad-combine.py <gaad_path>')
+        sys.exit(1)
+    combine_gaad_files(sys.argv[1])
