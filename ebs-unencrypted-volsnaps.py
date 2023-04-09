@@ -36,13 +36,13 @@ def list_ebs_volumes(profile):
             if 'Encrypted' in snapshot and not snapshot['Encrypted']:
                 unencrypted_snapshots += 1
 
-    print("Unencrypted Volumes: ", unencrypted_volumes)
-    print("Unencrypted Snapshots: ", unencrypted_snapshots)
-    print("Unencrypted Volumes (attached & in-use): ", unencrypted_attached_volumes)
+    print('Unencrypted Volumes: ', unencrypted_volumes)
+    print('Unencrypted Snapshots: ', unencrypted_snapshots)
+    print('Unencrypted Volumes (attached & in-use): ', unencrypted_attached_volumes)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print("Usage: python3 ebs-unencrypted-volumes-snapshots.py <PROFILE>")
+        print('Usage: python3 ebs-unencrypted-volumes-snapshots.py <PROFILE>')
         sys.exit(1)
     profile = sys.argv[1]
     list_ebs_volumes(profile)

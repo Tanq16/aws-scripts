@@ -1,10 +1,11 @@
 # IAM Roles Trusting Root
 # -----------------------
 # This script navigates the present working directory to
-# ingest "combined-gaad.json" to collect all accounts
-# present in the file and list out all roles that trust
-# the account root for each of the accounts. Pipe to jq
-# for easy filtering.
+# ingest "combined-gaad.json" from the "analysis" dir
+# to collect all accounts present in the file and list
+# out all roles that trust the account root for each of
+# the accounts. The result is stored in the "analysis"
+# directory.
 # 
 # If an argument is passed, it is read as a file for
 # "account_names", and the expected contents are a list
@@ -41,14 +42,17 @@ def get_root_trusts(data, account_numbers):
 def main(data):
     account_numbers = get_account_numbers(data)
     roles_trusting_root = get_root_trusts(data, account_numbers)
-    print(json.dumps(roles_trusting_root))
+    if not os.path.exists('./analysis'):
+        os.makedirs('analysis')
+    f = open('analysis/iam-roles-trusting-root.json', 'w')
+    f.write(json.dumps(roles_trusting_root))
+    f.close()
 
 if __name__ == '__main__':
-    files = [file for file in os.listdir(".") if file.endswith("gaad.json")]
-    if not "combined-gaad.json" in files:
-        print("Usage: python3 iam-roles-trusting-root.py\nEnsure that combined-gaad.json in the current directory.")
+    if not os.path.exists('./analysis/combined-gaad.json'):
+        print('Usage: python3 iam-roles-trusting-root.py\nEnsure that analysis/combined-gaad.json in the current directory.')
         sys.exit(1)
-    f = open("combined-gaad.json")
+    f = open('analysis/combined-gaad.json')
     data = json.loads(f.read())
     f.close()
     main(data)

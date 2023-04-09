@@ -10,18 +10,18 @@ from configparser import ConfigParser
 
 def get_aws_profiles():
     config = ConfigParser()
-    config.read(os.path.expanduser("~/.aws/credentials"))
+    config.read(os.path.expanduser('~/.aws/credentials'))
 
     profiles = {}
     # parse for access key IDs and secret access keys
     for section in config.sections():
         profile = {
-            "aki": config[section]["aws_access_key_id"],
-            "sak": config[section]["aws_secret_access_key"],
+            'aki': config[section]['aws_access_key_id'],
+            'sak': config[section]['aws_secret_access_key'],
         }
         # parse for session token if present (STS sessions)
-        if "aws_session_token" in config[section]:
-            profile["st"] = config[section]["aws_session_token"]
+        if 'aws_session_token' in config[section]:
+            profile['st'] = config[section]['aws_session_token']
         profiles[section] = profile
 
     return profiles

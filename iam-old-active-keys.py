@@ -20,7 +20,7 @@ def get_active_keys(iam_client, user_name):
         if access_key['Status'] == 'Active':
             last_rotated = access_key['CreateDate'].replace(tzinfo=None)
             if datetime.utcnow() - last_rotated > timedelta(days=90):
-                active_keys.append(access_key['AccessKeyId'] + " :: " + access_key['CreateDate'].strftime('%Y-%m-%d'))
+                active_keys.append(access_key['AccessKeyId'] + ' :: ' + access_key['CreateDate'].strftime('%Y-%m-%d'))
     return active_keys
 
 def main(profile_name):
@@ -35,11 +35,11 @@ def main(profile_name):
         if active_keys:
             users.append({'user': user_name, 'keys': active_keys})
 
-    print(json.dumps({"data":users}))
+    print(json.dumps({'data':users}))
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print("Usage: python3 iam-old-active-keys.py <PROFILE>")
+        print('Usage: python3 iam-old-active-keys.py <PROFILE>')
         sys.exit(1)
     profile = sys.argv[1]
     main(profile)
