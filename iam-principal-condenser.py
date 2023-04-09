@@ -62,15 +62,13 @@ def condense_principals(data):
         users.append(condense_user(user, data['GroupDetailList'], data['Policies']))
     for role in data['RoleDetailList']:
         roles.append(condense_role(role, data['Policies']))
-    return json.dumps(roles), json.dumps(users)
+    return roles, users
 
 def main(data):
-    condensed_roles, condensed_users = condense_principals(data)
-    f = open('analysis/iam-condensed-users.json', 'w')
-    f.write(json.dumps(condensed_users))
-    f.close()
-    f = open('analysis/iam-condensed-roles.json', 'w')
-    f.write(json.dumps(condensed_roles))
+    roles, users = condense_principals(data)
+    to_write = {'Users': users, 'Roles': roles}
+    f = open('analysis/iam-condensed-principals.json', 'w')
+    f.write(json.dumps(to_write))
     f.close()
 
 if __name__ == '__main__':
