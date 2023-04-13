@@ -11,15 +11,16 @@ The following scripts currently live in the repo &rarr;
 **Utility**
 
 * `aws-multi-session.sh` &rarr; A script to assume a given role across multiple accounts via an IAM user.
-* `aws-config-parser.py` &rarr; A script to print out the credentials from the `~/.aws/credentials` file in JSON format for easy `jq` parsing.
+* `aws-config-parser.py` &rarr; A script to print out the credentials from the `~/.aws/credentials` file in JSON format for easy `jq` parsing, or downloads gaads.
 * `aws-ip-cidr-check.py` &rarr; A script that takes in an IP or a CIDR range to check if they belong to AWS.
+* `iam-gaad-combine.py` &rarr; A script that combines the result of the multiple JSON files resulting from `aws iam get-account-authorization-details --profile $PRFL > $PRFL-gaad.json`.
 
 **IAM Analysis**
 
-* `iam-gaad-combine.py` &rarr; A script that combines the result of the multiple JSON files resulting from `aws iam get-account-authorization-details --profile $PRFL > $PRFL-gaad.json`.
 * `iam-roles-trusting-root.py` &rarr; A script to print out JSON of all roles that trust account root for all accounts in combined gaad.
 * `iam-principal-condenser.py` &rarr; A script that condenses users and roles into a single collection of all their associated policies (including groups and attached policies).
 * `iam-permission-condenser.py` &rarr; A script that condenses permissions of users and roles into a single collection of all action, resource combinations.
+* `iam-check-ability.py` &rarr; A script that checks which principals can perform a certain action on a given resource and returns all those entities.
 
 **Service-Based**
 
